@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample
+      tier: backend
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: sample
+        tier: backend
+        track: stable
+    spec:
+      containers:
+      - name: sampleapi-container
+        image: k8simagesregistery.azurecr.io/api:#{tag}#
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: sampleapp
