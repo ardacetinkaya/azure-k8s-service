@@ -25,7 +25,3 @@ spec:
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
-        - name: API_SERVICE
-          value: "sampleapi-service"
-      imagePullSecrets:
-      - name: sampleapp
