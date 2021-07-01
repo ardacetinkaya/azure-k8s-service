@@ -79,3 +79,9 @@ helm install cert-manager jetstack/cert-manager \
   --set webhook.nodeSelector."kubernetes\.io/os"=linux \
   --set cainjector.nodeSelector."kubernetes\.io/os"=linux
 ```
+
+- NGINX Ingress'in IP'sini almak için
+```
+kubectl get services -n ingress-default
+kubectl -n ingress-default get svc nginx-ingress-ingress-nginx-controller -o json | jq .status.loadBalancer.ingress[0].ip
+```
