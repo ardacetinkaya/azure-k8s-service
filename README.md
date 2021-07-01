@@ -1,6 +1,8 @@
 # azure-k8s-service demo
 
-Bu repository (Azure Kubernetes Service ile tanışalım)[https://www.minepla.net/2020/08/azure-kubernetes-service-ile-tanisalim/] blog yazısında anlatılan içeriğe ev sahipliği yapıyor.
+Bu repository [Azure Kubernetes Service ile tanışalım](https://www.minepla.net/2020/08/azure-kubernetes-service-ile-tanisalim/) blog yazısında anlatılan içeriğe ev sahipliği yapıyor. 
+
+Azure Kubernetes Service üzerinde bir "cluster"'ı __terraform__ ile de basitçe yaratabilmek de mümkün.
 
 GitHub CodeSpace üzerinden geliştirme yapabilmek için, __terraform__ CodeSpace de kurulmalı;
 - curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
