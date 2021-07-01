@@ -88,3 +88,12 @@ helm install cert-manager jetstack/cert-manager \
 kubectl get services -n ingress-default
 kubectl -n ingress-default get svc nginx-ingress-ingress-nginx-controller -o json | jq .status.loadBalancer.ingress[0].ip
 ```
+
+- Sertifika kontrolleri
+```
+kubectl get certificates
+kubectl get certificaterequests.cert-manager.io 
+kubectl describe certificate www-crt
+kubectl delete certificate www-crt
+```
+
