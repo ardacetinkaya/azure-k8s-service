@@ -58,3 +58,24 @@ helm install nginx-ingress ingress-nginx/ingress-nginx \
     --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux \
     --set controller.admissionWebhooks.patch.nodeSelector."beta\.kubernetes\.io/os"=linux
 ```
+
+- "namespace"'de sertifika validasyonu(Issuer kontrolü) yapılmasın
+```
+kubectl label namespace ingress-default cert-manager.io/disable-validation=true
+```
+
+- cert-manager'ı helm'e eklemek için
+```
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+```
+
+- cert-manager yüklemek için
+```
+helm install cert-manager jetstack/cert-manager \
+  --namespace ingress-default \
+  --set installCRDs=true \
+  --set nodeSelector."kubernetes\.io/os"=linux \
+  --set webhook.nodeSelector."kubernetes\.io/os"=linux \
+  --set cainjector.nodeSelector."kubernetes\.io/os"=linux
+```
