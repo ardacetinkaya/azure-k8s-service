@@ -25,3 +25,33 @@ az aks start --resource-group k8s-demo-resources --name k8s-cluster-01
 
 az aks stop --resource-group k8s-demo-resources --name k8s-cluster-01
 ```
+
+
+- __kubectl__ yüklemek için
+```
+az aks install-cli
+```
+
+- Cluster'a bağlanmak için;
+```
+az aks get-credentials --resource-group "k8s-demo-resources" --name "k8s-cluster-01"
+```
+
+- Cluster'daki node'ları liste
+```
+kubectl get nodes
+```
+- "namespace" yaratmak için
+```
+kubectl create namespace ingress-default
+```
+
+- NGINX Ingress yüklemek için
+```
+helm install nginx-ingress ingress-nginx/ingress-nginx \
+    --namespace ingress-default \
+    --set controller.replicaCount=2 \
+    --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux \
+    --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux \
+    --set controller.admissionWebhooks.patch.nodeSelector."beta\.kubernetes\.io/os"=linux
+```
