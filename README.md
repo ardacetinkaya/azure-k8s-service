@@ -1,4 +1,4 @@
-# azure-k8s-service demo
+# Azure Kubernetes Service demo
 
 Bu repository'de [Azure Kubernetes Service ile tanışalım](https://www.minepla.net/2020/08/azure-kubernetes-service-ile-tanisalim/) blog yazısında anlatılan Azure Kubernetes Service ile ilgili örnekleri bulabilirsiniz.
 
