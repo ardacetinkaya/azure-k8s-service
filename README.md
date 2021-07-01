@@ -13,8 +13,10 @@ GitHub CodeSpace üzerinden geliştirme yapabilmek için, __terraform__ CodeSpac
 
 Infrastructure>Azure klasörü içerisinde __terraform__ ile Azure Kubernetes Service içinde bir cluster oluşturmak için;
 - terraform init
+  - __state__ dosyasını Azure Storage'da tutabilmek için;
+     - terraform init -backend=true -backend-config storage_account_name="k8sdemoresourcestfstate" -backend-config container_name="terraform-states" -backend-config access_key="" -backend-config key="terraform.tfstate"
 - terraform plan -refresh=true 
-- terraform apply -auto-appove
+- terraform apply -auto-approve
 
 
 Gerektiği zaman cluster'ı durdurup, tekrar başlatmak için;

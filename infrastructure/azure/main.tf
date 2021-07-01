@@ -17,6 +17,9 @@ provider "azuread" {
 
 
 terraform {
+  backend "azurerm" {
+  }
+  
   required_providers {
     azurerm = {
       source  = "registry.terraform.io/hashicorp/azurerm"
