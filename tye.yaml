@@ -10,3 +10,7 @@ services:
   project: SampleApp/SampleApp.csproj
 - name: backend
   project: SampleAPI/SampleAPI.csproj
+- name: private-frontend
+  project: SampleApp/SampleApp.csproj
+- name: private-backend
+  project: SampleAPI/SampleAPI.csproj
