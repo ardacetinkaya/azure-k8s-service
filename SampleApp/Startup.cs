@@ -29,11 +29,14 @@ namespace SampleApp
             
             services.AddHttpClient("backend", c =>
             {
-                // var host = Environment.IsDevelopment()? Configuration["BACKEND_SERVICE_HOST"]:Configuration["PRIVATE_BACKEND_SERVICE_HOST"];
-                // var port = Environment.IsDevelopment()? Configuration["BACKEND_SERVICE_PORT"]:Configuration["PRIVATE_BACKEND_SERVICE_PORT"];
-                
-                var host = Configuration["BACKEND_SERVICE_HOST"];
-                var port = Configuration["BACKEND_SERVICE_PORT"];
+                var host = Configuration["PRIVATE_BACKEND_SERVICE_HOST"];
+                var port = Configuration["PRIVATE_BACKEND_SERVICE_PORT"];
+
+                if(Environment.IsDevelopment())
+                {
+                    host = Configuration["BACKEND_SERVICE_HOST"];
+                    port = Configuration["BACKEND_SERVICE_PORT"];
+                }
 
                 var uri = $"http://{host}:{port}";
                 
