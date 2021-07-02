@@ -14,23 +14,26 @@ namespace SampleApp
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, Microsoft.Extensions.Hosting.IHostEnvironment env)
         {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
+        public IHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddHttpClient("backend", c =>
             {
-                var host = Configuration["BACKEND_SERVICE_HOST"];
-                var port = Configuration["BACKEND_SERVICE_PORT"];
-
+                var host = Environment.IsDevelopment()? Configuration["BACKEND_SERVICE_HOST"]:Configuration["PRIVATE_BACKEND_SERVICE_HOST"];
+                var port = Environment.IsDevelopment()? Configuration["BACKEND_SERVICE_PORT"]:Configuration["PRIVATE_BACKEND_SERVICE_PORT"];
+                
                 var uri = $"http://{host}:{port}";
-                c.BaseAddress = new Uri(uri);
+                
+                c.BaseAddress = Configuration.GetServiceUri("private-backend");//new Uri(uri);
             });
             services.AddRazorPages();
         }
