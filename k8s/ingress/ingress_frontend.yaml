@@ -20,6 +20,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: frontend
+            name: private-frontend
             port:
               number: 80

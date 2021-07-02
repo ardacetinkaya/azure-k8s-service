@@ -8,13 +8,13 @@
     <h1 class="display-4">Hello World</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
-    <p>
-        <ul>
-            @Model.DebugView
-            ---------------------
-            @foreach (var forecast in Model.Forecasts)
-            {
-                <li>@forecast.Date.ToShortDateString() - @forecast.Summary</li>
-            }
-        </ul>
-    </p>
+<p>
+    <ul>
+        ---------------------
+        @foreach (var forecast in Model.Forecasts)
+        {
+            <li>@forecast.Date.ToShortDateString() - @forecast.Summary</li>
+        }
+    </ul>
+</p>
+<p>Mode: @Model.Environment</p>

@@ -17,7 +17,7 @@ namespace SampleApp.Pages
         private readonly IConfiguration _configuration;
         public IEnumerable<WeatherForecast> Forecasts { get; private set; }
 
-        public string DebugView { get; set; }
+        public string Environment { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger, IHttpClientFactory clientFactory, IConfiguration configuration)
         {
@@ -31,7 +31,7 @@ namespace SampleApp.Pages
         {
             try
             {
-                DebugView = ((IConfigurationRoot)_configuration).GetDebugView();
+                Environment = _configuration["ASPNETCORE_ENVIRONMENT"];
                 var request = new HttpRequestMessage(HttpMethod.Get, "weatherforecast");
                 var client = _clientFactory.CreateClient("backend");
 
