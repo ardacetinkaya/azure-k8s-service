@@ -29,12 +29,15 @@ namespace SampleApp
             
             services.AddHttpClient("backend", c =>
             {
-                var host = Environment.IsDevelopment()? Configuration["BACKEND_SERVICE_HOST"]:Configuration["PRIVATE_BACKEND_SERVICE_HOST"];
-                var port = Environment.IsDevelopment()? Configuration["BACKEND_SERVICE_PORT"]:Configuration["PRIVATE_BACKEND_SERVICE_PORT"];
+                // var host = Environment.IsDevelopment()? Configuration["BACKEND_SERVICE_HOST"]:Configuration["PRIVATE_BACKEND_SERVICE_HOST"];
+                // var port = Environment.IsDevelopment()? Configuration["BACKEND_SERVICE_PORT"]:Configuration["PRIVATE_BACKEND_SERVICE_PORT"];
                 
+                var host = Configuration["BACKEND_SERVICE_HOST"];
+                var port = Configuration["BACKEND_SERVICE_PORT"];
+
                 var uri = $"http://{host}:{port}";
                 
-                c.BaseAddress = Configuration.GetServiceUri("private-backend");//new Uri(uri);
+                c.BaseAddress = new Uri(uri);
             });
             services.AddRazorPages();
         }
