@@ -17,6 +17,7 @@ namespace SampleApp
         public Startup(IConfiguration configuration, Microsoft.Extensions.Hosting.IHostEnvironment env)
         {
             Configuration = configuration;
+            Environment = env;
         }
 
         public IConfiguration Configuration { get; }
