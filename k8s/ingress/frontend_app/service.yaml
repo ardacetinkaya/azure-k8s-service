@@ -24,7 +24,7 @@ spec:
         - containerPort: 80
         env:
         - name: ASPNETCORE_ENVIRONMENT
-          value: Development
+          value: Production
 ---
 apiVersion: v1
 kind: Service
