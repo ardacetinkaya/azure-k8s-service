@@ -1,10 +1,4 @@
 
-resource "azurerm_user_assigned_identity" "k8s_cluster_01_identity" {
-  location            = azurerm_resource_group.k8s_demo_resources.location
-  resource_group_name = azurerm_resource_group.k8s_demo_resources.name
-  name                = "k8s-identity"
-}
-
 resource "azurerm_kubernetes_cluster" "k8s_cluster_01" {
   name                = "k8s-cluster-01"
   location            = azurerm_resource_group.k8s_demo_resources.location
