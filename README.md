@@ -4,8 +4,8 @@ Bu repository'de [Azure Kubernetes Service ile tanışalım](https://www.minepla
 
 -------------------------------------------------------------------------------
 
-## Güncelleme
-Bu repo.'ya ev sahipliği yapan yazıda, k8s için gerekli olan bileşenleri, Azure'da portal dışında __terraform__ gibi "infra-as-code" konsepti ile de oluşturabileceğimizi belirtmiştim. Kodlar arasında **_infrastructure/azure_** klasörü içinde Azure Kubernetes Service için örnek olabilecek kodları görebilirsiniz.
+## ![Güncelleme](https://via.placeholder.com/15/1589F0/000000?text=+) Güncelleme
+Bu repo.'ya ev sahipliği yapan yazıda, **k8s** için gerekli olan bileşenleri, Azure'da portal dışında __terraform__ gibi "infra-as-code" konsepti ile de oluşturabileceğimizi belirtmiştim. Kodlar arasında **_infrastructure/azure_** klasörü içinde Azure Kubernetes Service için örnek olabilecek kodları görebilirsiniz.
 
 - **_[infrastructure/azure](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/infrastructure/azure)_** klasörü içerisinde _terraform_ ile Azure Kubernetes Service içinde bir cluster oluşturmak için sırasıyla:
   - terraform init
@@ -26,7 +26,8 @@ terraform -help  !!Terraform'un başarılı bir şekilde kurulduğunu anlamak i�
 terraform -install-autocomplete !!Opsiyonel - terraform geliştirmelerini daha kolay yapmak için!!
 ```
 
-#### AKS'de **"kubernetes cluster"**'ını yönetebilmek için temel bazı komutlar
+Aynı zamanda k8s cluster'ını yönetmek ya da bazı bileşenleri oluşturmak için **_kubectl_** komutundan faydalanabiliyoruz. Benzer şekilde AKS için **_AZ CLI_** ile bazı işlemleri gerçekleştirebiliyoruz.
+
 - Gerektiği zaman cluster'ı durdurup, tekrar başlatmak için
 ```
 az aks start --resource-group k8s-demo-resources --name k8s-cluster-01
@@ -96,7 +97,7 @@ kubectl -n ingress-default get svc nginx-ingress-ingress-nginx-controller -o jso
 ```
 kubectl apply -f k8s/azure_aks/ingress_frontend.yaml
 ```
-<sub>* Blog yazısında Azure DevOps üzerinden basitçe kubectl komutlarını çalıştırıyorduk. Ama konsoldan da bütün _service, pod...vs._ tanımları çalıştırılabilir.</sub>
+<sub>* Blog yazısında _Azure DevOps_ üzerinden basitçe _kubectl_ komutlarını çalıştırıyorduk. Ama komut satırından da bütün _service, pod...vs._ tanımları çalıştırılabilir.</sub>
 
 
 - Sertifika kontrolleri
@@ -107,35 +108,45 @@ kubectl describe certificate www-crt
 kubectl delete certificate www-crt
 ```
 
-# Bonus 
+-------------------------------------------------------------------------------
+## ![!!!BONUS!!!😀](https://via.placeholder.com/15/c5f015/000000?text=+) !!!BONUS!!!😀 
 
-Amazon Elastic Kubernetes Service ile de k8s cluster'ı oluşturup, uygulamaları kolaylıkla farklı bir "cloud" platformunda da çalıştırabiliyoruz. Yine __terraform__ ile AWS tarafında gerekli bileşenleri oluşturmak için ""infrastructure>aws" klasörü içindeki kodlara bakabilirsiniz.
-- AWS tarafındaki "resource" bileşenlerini bilmiyorum bu yüzden, __terraform__'da oluşturulmuş modülleri kullanıyorum.
-  - k8s cluster'ının network alt yapısı için: https://github.com/terraform-aws-modules/terraform-aws-vpc
-  - k8s cluster'ı için: https://github.com/terraform-aws-modules/terraform-aws-eks
+Yeni bir şeyler öğrenmek çok zevkli. Bu yüzden **k8s**'i daha iyi anlamak, tecrübe edebilmek için farklı bir platform ile tanışmak da istedim. **AWS** üzerinde Kubernetes nasıl konumlandırılmış buna bakmaya çalıştım. **Amazon Elastic Kubernetes Service(AWS EKS)** ile yine benzer şekilde __terraform__ ile bir cluster nasıl oluşturulur, __k8s__ dinamiklikleri neler daha iyi öğrenmek için de fırsat. **Amazon Elastic Kubernetes Service(AWS EKS)** ile ilgili bilgiler için [buraya](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)... 
 
-- AWS CLI'ı kurmak için
-```
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-```
 
-- AWS CLI'ın konfigürasyonu için
-```
-aws configure
-```
 
-- AWS CLI ile AWS EKS cluster'ına authenticate olabilmek için __aws-iam-authenticator__ kurulu gerekli --> https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
-```
-curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator
-chmod +x ./aws-iam-authenticator
-mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin
-echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
-```
 
-- kubectl ile AWS EKS cluster'ını ilişkilendir
-```
-aws sts get-caller-identity
-aws eks --region {region} update-kubeconfig --name {cluster_name}
-```
+- **_[infrastructure/aws](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/infrastructure/aws)_** klasörü altında yine benzer terraform yaklaşımları ile ilerleyebiliyoruz.
+  - AWS tarafındaki k8s için gerekli olabilecek "resource"'ları hiç bilmiyorum bu yüzden, **terraform**'daki modülleri tercih ettim;
+    - k8s cluster'ının network alt yapısı için: https://github.com/terraform-aws-modules/terraform-aws-vpc
+    - k8s cluster'ı için: https://github.com/terraform-aws-modules/terraform-aws-eks
+
+- Benzer şekilde AWS EKS'de oluşturulmuş bir k8s cluster'ını yönetebilmek için yine **kubectl**'den faydalanabiliyoruz
+- AWS CLI kullanarak komut satırından EKS cluster'ını yönetebiliyoruz.
+  - AWS CLI'ı kurmak için
+  ```
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  unzip awscliv2.zip
+  sudo ./aws/install
+  ```
+
+  - AWS CLI'ın konfigürasyonu için; AWS hesabı ile komut satırı komutlarının çalışmasını ilişkilendiriyoruz
+  ```
+  aws configure
+  ```
+
+  - AWS CLI ile AWS EKS cluster'ına authenticate olabilmek için __aws-iam-authenticator__ kurulu gerekli --> https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
+  ```
+  curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator
+  chmod +x ./aws-iam-authenticator
+  mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin
+  echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+  ```
+
+  - _kubectl_ ile AWS EKS cluster'ını ilişkilendiriyoruz ki, _kubectl_ komutlarımız EKS cluster'ı için çalışsın
+  ```
+  aws sts get-caller-identity
+  aws eks --region {region} update-kubeconfig --name {cluster_name}
+  ```
+  
+  
