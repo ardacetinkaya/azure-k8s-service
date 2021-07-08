@@ -1,0 +1,5 @@
+# access_key_id= ""
+# access_key_secret= ""
+region                  = "us-west-2"
+domain                  = "miyop.in"
+nginx_external_ip       = ""
