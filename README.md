@@ -1,6 +1,6 @@
 # Azure Kubernetes Service demo
 
-Bu repository'de [Azure Kubernetes Service ile tanışalım](https://www.minepla.net/2020/08/azure-kubernetes-service-ile-tanisalim/) blog yazısında anlatılan Azure Kubernetes Service ile ilgili örnekleri bulabilirsiniz.
+Bu repository'de [Azure Kubernetes Service ile tanışalım](https://www.minepla.net/2020/08/azure-kubernetes-service-ile-tanisalim/) blog yazısında anlatılan Azure Kubernetes(k8s) Service(AKS) ile ilgili örnekleri bulabilirsiniz.
 
 -------------------------------------------------------------------------------
 
@@ -50,12 +50,13 @@ az aks get-credentials --resource-group "k8s-demo-resources" --name "k8s-cluster
 kubectl get nodes
 ```
 
-- Kubernetes içinde "namespace" yaratmak için(ingress-default adında bir namespace yaratılır)
+- Kubernetes içinde **namespace** yaratmak için(__ingress-default__ adında bir namespace yaratılır)
 ```
 kubectl create namespace ingress-default
 ```
+<sub>* kubernetes bileşenlerini mantıksal gruplar şeklinde yönetebilmek için __namespace__ kullanabiliyoruz.</sub>
 
-- NGINX Ingress yüklemek için
+- NGINX Ingress Controller'ını yüklemek için(İyi de _ingress_ ne?*)
 ```
 helm install nginx-ingress ingress-nginx/ingress-nginx \
     --namespace ingress-default \
@@ -64,6 +65,7 @@ helm install nginx-ingress ingress-nginx/ingress-nginx \
     --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux \
     --set controller.admissionWebhooks.patch.nodeSelector."beta\.kubernetes\.io/os"=linux
 ```
+<sub>* __ingress__, basitçe; Kubernetes'deki servislere dışarıdan erişmek için gerekli yönlendirmeleri yapabilmek için kullanılan yapı. Bu örneklerde **nginx**'i bu yönlendirmeler için kullabiliyoruz. AKS özelinde __Application Gateway__'de kullanılabilmekte. </sub>
 
 - "namespace"'de sertifika validasyonun(Issuer kontrolü) kapatılması
 ```
