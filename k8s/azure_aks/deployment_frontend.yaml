@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample
+      tier: frontend
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: sample
+        tier: frontend
+        track: stable
+    spec:
+      containers:
+      - name: sampleapp-container
+        image: k8simagesregistery.azurecr.io/app:#{tag}#
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development

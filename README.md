@@ -7,7 +7,7 @@ Bu repository'de [Azure Kubernetes Service ile tanışalım](https://www.minepla
 
 Azure Kubernetes Service üzerinde bir "cluster"'ı __terraform__ ile de oluşturabilmenin de örnekleri mevcut.
 
-- "Infrastructure>Azure" klasörü içerisinde __terraform__ ile Azure Kubernetes Service içinde bir cluster oluşturmak için sırasıyla:
+- "infrastructure>azure" klasörü içerisinde __terraform__ ile Azure Kubernetes Service içinde bir cluster oluşturmak için sırasıyla:
   - terraform init
     "state" dosyasını Azure Storage'da tutabilmek için
        ``` 
@@ -32,7 +32,7 @@ az aks start --resource-group k8s-demo-resources --name k8s-cluster-01
 az aks stop --resource-group k8s-demo-resources --name k8s-cluster-01
 ```
 
-- __kubectl__ yüklemek için
+- AKS üzerindeki cluster'ı yönetebilmek için AKS CLI'ı yüklemek için
 ```
 az aks install-cli
 ```
@@ -102,3 +102,35 @@ kubectl describe certificate www-crt
 kubectl delete certificate www-crt
 ```
 
+# Bonus 
+
+Amazon Elastic Kubernetes Service ile de k8s cluster'ı oluşturup, uygulamaları kolaylıkla farklı bir "cloud" platformunda da çalıştırabiliyoruz. Yine __terraform__ ile AWS tarafında gerekli bileşenleri oluşturmak için ""infrastructure>aws" klasörü içindeki kodlara bakabilirsiniz.
+- AWS tarafındaki "resource" bileşenlerini bilmiyorum bu yüzden, __terraform__'da oluşturulmuş modülleri kullanıyorum.
+  - k8s cluster'ının network alt yapısı için: https://github.com/terraform-aws-modules/terraform-aws-vpc
+  - k8s cluster'ı için: https://github.com/terraform-aws-modules/terraform-aws-eks
+
+- AWS CLI'ı kurmak için
+```
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+
+- AWS CLI'ın konfigürasyonu için
+```
+aws configure
+```
+
+- AWS CLI ile AWS EKS cluster'ına authenticate olabilmek için __aws-iam-authenticator__ kurulu gerekli --> https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
+```
+curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator
+chmod +x ./aws-iam-authenticator
+mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin
+echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+```
+
+- kubectl ile AWS EKS cluster'ını ilişkilendir
+```
+aws sts get-caller-identity
+aws eks --region {region} update-kubeconfig --name {cluster_name}
+```

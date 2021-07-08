@@ -355,3 +355,4 @@ MigrationBackup/
 *.terraform*
 *.terraform
 *.tfstate*
+infrastructure/aws/kubeconfig_k8s-cluster-01

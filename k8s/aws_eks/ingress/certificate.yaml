@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: aws-crt
+spec:
+  secretName: aws-crt-secret
+  dnsNames:
+  - aws.miyop.in
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+    group: cert-manager.io
