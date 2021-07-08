@@ -113,7 +113,9 @@ kubectl delete certificate www-crt
 -------------------------------------------------------------------------------
 ## ![!!!BONUS!!!😀](https://via.placeholder.com/15/c5f015/000000?text=+) !!!BONUS!!!😀 
 
-Yeni bir şeyler öğrenmek çok zevkli. Bu yüzden **k8s**'i daha iyi anlamak, tecrübe edebilmek için farklı bir platform ile tanışmak da istedim. **AWS** üzerinde Kubernetes nasıl konumlandırılmış buna bakmaya çalıştım. **Amazon Elastic Kubernetes Service(AWS EKS)** ile yine benzer şekilde __terraform__ ile bir cluster nasıl oluşturulur, __k8s__ dinamiklikleri neler daha iyi öğrenmek için de fırsat. **Amazon Elastic Kubernetes Service(AWS EKS)** ile ilgili bilgiler için [buraya](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)... 
+Yeni bir şeyler öğrenmek çok zevkli. Bu yüzden **k8s**'i daha iyi anlamak, tecrübe edebilmek için farklı bir platform ile tanışmak da istedim. **AWS** üzerinde Kubernetes nasıl konumlandırılmış buna bakmaya çalıştım. Bundan dolayı bu **BONUS** ortaya çıktı.
+
+**Amazon Elastic Kubernetes Service(AWS EKS)** ile yine benzer şekilde __terraform__ ile bir cluster nasıl oluşturulur, __k8s__ dinamiklikleri neler daha iyi öğrenmek için de fırsat. **Amazon Elastic Kubernetes Service(AWS EKS)** ile ilgili bilgiler için [buraya](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)... 
 
 
 - **_[infrastructure/aws](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/infrastructure/aws)_** klasörü altında yine benzer terraform yaklaşımları ile ilerleyebiliyoruz.
@@ -135,7 +137,7 @@ Yeni bir şeyler öğrenmek çok zevkli. Bu yüzden **k8s**'i daha iyi anlamak, 
   aws configure
   ```
 
-  - AWS CLI ile AWS EKS cluster'ına authenticate olabilmek için __aws-iam-authenticator__ kurulu gerekli --> https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
+  - AWS CLI ile AWS EKS cluster'ında yetkilendirilmek için __aws-iam-authenticator__ kurulumu gerekli --> https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
   ```
   curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator
   chmod +x ./aws-iam-authenticator
