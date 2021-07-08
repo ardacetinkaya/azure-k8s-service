@@ -2,29 +2,31 @@
 
 Bu repository'de [Azure Kubernetes Service ile tanışalım](https://www.minepla.net/2020/08/azure-kubernetes-service-ile-tanisalim/) blog yazısında anlatılan Azure Kubernetes Service ile ilgili örnekleri bulabilirsiniz.
 
-----------------------------------------------
+-------------------------------------------------------------------------------
 
+## Güncelleme
+Bu repo.'ya ev sahipliği yapan yazıda, k8s için gerekli olan bileşenleri, Azure'da portal dışında __terraform__ gibi "infra-as-code" konsepti ile de oluşturabileceğimizi belirtmiştim. Kodlar arasında **_infrastructure/azure_** klasörü içinde Azure Kubernetes Service için örnek olabilecek kodları görebilirsiniz.
 
-Azure Kubernetes Service üzerinde bir "cluster"'ı __terraform__ ile de oluşturabilmenin de örnekleri mevcut.
-
-- "infrastructure>azure" klasörü içerisinde __terraform__ ile Azure Kubernetes Service içinde bir cluster oluşturmak için sırasıyla:
+- **_[infrastructure/azure](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/infrastructure/azure)_** klasörü içerisinde _terraform_ ile Azure Kubernetes Service içinde bir cluster oluşturmak için sırasıyla:
   - terraform init
-    "state" dosyasını Azure Storage'da tutabilmek için
+    - _"state"_ dosyasını Azure Storage'da tutabilmek için
        ``` 
        terraform init -backend=true -backend-config storage_account_name="k8sdemoresourcestfstate" -backend-config container_name="terraform-states" -backend-config access_key="" -backend-config key="terraform.tfstate"
        ```
+       *Bu sayede terraform tarafında yapılmış değişiklikleri başka bir kişi de bu _state_ dosyası üzerinde çalışarak yapabilir.
   - terraform plan -refresh=true 
   - terraform apply -auto-approve
 
-- GitHub CodeSpace üzerinden geliştirme yapabilmek için, __terraform__, GitHub CodeSpace de kurulmalı:
-  - curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-  - sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-  - sudo apt-get update && sudo apt-get install terraform
-  - terraform -help (Terraform'un başarılı bir şekilde kurulduğunu anlamak için)
-  - (optional)terraform -install-autocomplete
+- [GitHub CodeSpace](https://github.com/features/codespaces) üzerinden geliştirme yapabilmek için, __terraform__, GitHub CodeSpace içerisinde kurulmalı:
+```
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update && sudo apt-get install terraform
+terraform -help  !!Terraform'un başarılı bir şekilde kurulduğunu anlamak için)!!
+terraform -install-autocomplete !!Opsiyonel - terraform geliştirmelerini daha kolay yapmak için!!
+```
 
-
-## Azure Kubernetes Service'deki cluster'ı yönetebilmek için temel bazı komutlar
+#### AKS'de **"kubernetes cluster"**'ını yönetebilmek için temel bazı komutlar
 - Gerektiği zaman cluster'ı durdurup, tekrar başlatmak için
 ```
 az aks start --resource-group k8s-demo-resources --name k8s-cluster-01
@@ -37,12 +39,12 @@ az aks stop --resource-group k8s-demo-resources --name k8s-cluster-01
 az aks install-cli
 ```
 
-- Cluster'a bağlanmak için ve kubectl komutlarının Azure Kubernetes Service'i için çalışmasını sağlamak için
+- Cluster'a bağlanmak için ve kubectl komutlarının AKS için çalışmasını sağlamak için
 ```
 az aks get-credentials --resource-group "k8s-demo-resources" --name "k8s-cluster-01"
 ```
 
-- Cluster'daki node'ları aşağıdaki gibi listelediğimiz zaman AKS üzerindeki node'lar listelenir
+- Cluster'daki node'ları listelemek için
 ```
 kubectl get nodes
 ```
@@ -62,18 +64,18 @@ helm install nginx-ingress ingress-nginx/ingress-nginx \
     --set controller.admissionWebhooks.patch.nodeSelector."beta\.kubernetes\.io/os"=linux
 ```
 
-- "namespace"'de sertifika validasyonu(Issuer kontrolü) yapılmasın
+- "namespace"'de sertifika validasyonun(Issuer kontrolü) kapatılması
 ```
 kubectl label namespace ingress-default cert-manager.io/disable-validation=true
 ```
 
-- cert-manager'ı helm'e eklemek için
+- cert-manager'ı **helm**'e eklemek için
 ```
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 ```
 
-- cert-manager yüklemek için
+- **cert-manager** yüklemek için
 ```
 helm install cert-manager jetstack/cert-manager \
   --namespace ingress-default \
@@ -83,16 +85,19 @@ helm install cert-manager jetstack/cert-manager \
   --set cainjector.nodeSelector."kubernetes\.io/os"=linux
 ```
 
-- NGINX ingress controller'ın IP'sini almak için
+- NGINX **ingress controller**'ın IP'sini almak için*
 ```
 kubectl get services -n ingress-default
 kubectl -n ingress-default get svc nginx-ingress-ingress-nginx-controller -o json | jq .status.loadBalancer.ingress[0].ip
 ```
+<sub>* IP'i bir domain ile ilişkilendirmek için kullanabiliriz</sub>
 
 - Ingress'i oluşturmak için
 ```
-kubectl apply -f k8s/ingress_frontend.yaml
+kubectl apply -f k8s/azure_aks/ingress_frontend.yaml
 ```
+<sub>* Blog yazısında Azure DevOps üzerinden basitçe kubectl komutlarını çalıştırıyorduk. Ama konsoldan da bütün _service, pod...vs._ tanımları çalıştırılabilir.</sub>
+
 
 - Sertifika kontrolleri
 ```
