@@ -66,6 +66,7 @@ helm install nginx-ingress ingress-nginx/ingress-nginx \
     --set controller.admissionWebhooks.patch.nodeSelector."beta\.kubernetes\.io/os"=linux
 ```
 <sub>* __ingress__, basitçe; Kubernetes'deki servislere dışarıdan erişmek için gerekli yönlendirmeleri yapabilmek için kullanılan yapı. Bu örneklerde **nginx**'i bu yönlendirmeler için kullabiliyoruz. AKS özelinde __Application Gateway__'de kullanılabilmekte. </sub>
+<sub>* İlk blog yazısında direkt __ingress__ kullanmadan basit bir şekilde ilerlemiştim, burada __nginx Ingress Controller__ ile **pod**'lara gelen request'leri yönlendirmek mümkün olabiliyor.</sub>
 
 - "namespace"'de sertifika validasyonun(Issuer kontrolü) kapatılması
 ```
