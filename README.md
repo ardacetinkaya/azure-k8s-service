@@ -1,6 +1,17 @@
 # Azure Kubernetes Service demo
 
+
+<img align="right" width="150" height="150" src="https://user-images.githubusercontent.com/4550197/125051903-18342780-e0ac-11eb-976b-99af7e9e2f9f.png">
+
+
 Bu repository'de [Azure Kubernetes Service ile tanışalım](https://www.minepla.net/2020/08/azure-kubernetes-service-ile-tanisalim/) blog yazısında anlatılan Azure Kubernetes(k8s) Service(AKS) ile ilgili örnekleri bulabilirsiniz.
+
+  - [Frontend tarafı için gerekli servis tanımı](https://github.com/ardacetinkaya/azure-k8s-service/blob/master/k8s/azure_aks/frontend_service/service.yaml) - k8s
+  - [Frontend tarafı için gerekli workload tanımı](https://github.com/ardacetinkaya/azure-k8s-service/blob/master/k8s/azure_aks/deployment_frontend.yaml) - k8s
+  - [Backend tarafı için gerekli servis tanımı](https://github.com/ardacetinkaya/azure-k8s-service/blob/master/k8s/azure_aks/backend_service/service.yaml) - k8s
+  - [Backend tarafı için gerekli workload tanımı](https://github.com/ardacetinkaya/azure-k8s-service/blob/master/k8s/azure_aks/deployment_backend.yaml) - k8s
+  - [ASP.NET Core Backend uygulaması](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/SampleAPI) - Docker imajlarının oluştuğu uygulama
+  - [ASP.NET Core Forentend uygulaması](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/SampleApp) - Docker imajlarının oluştuğu uygulama
 
 -------------------------------------------------------------------------------
 
