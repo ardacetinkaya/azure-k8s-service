@@ -49,6 +49,8 @@ az aks get-credentials --resource-group "k8s-demo-resources" --name "k8s-cluster
 ```
 kubectl get nodes
 ```
+![image](https://user-images.githubusercontent.com/4550197/125045240-727dba00-e0a5-11eb-9e36-f77ec899897c.png)
+
 
 - Kubernetes içinde **namespace** yaratmak için(__ingress-default__ adında bir namespace yaratılır)
 ```
@@ -66,6 +68,7 @@ helm install nginx-ingress ingress-nginx/ingress-nginx \
     --set controller.admissionWebhooks.patch.nodeSelector."beta\.kubernetes\.io/os"=linux
 ```
 <sub>* __ingress__, basitçe; Kubernetes'deki servislere dışarıdan erişmek için gerekli yönlendirmeleri yapabilmek için kullanılan yapı. Bu örneklerde **nginx**'i bu yönlendirmeler için kullabiliyoruz. AKS özelinde __Application Gateway__'de kullanılabilmekte. </sub>
+
 <sub>* İlk blog yazısında direkt __ingress__ kullanmadan basit bir şekilde ilerlemiştim, burada __nginx Ingress Controller__ ile **pod**'lara gelen request'leri yönlendirmek mümkün olabiliyor.</sub>
 
 - "namespace"'de sertifika validasyonun(Issuer kontrolü) kapatılması
@@ -78,8 +81,9 @@ kubectl label namespace ingress-default cert-manager.io/disable-validation=true
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 ```
+<sub>* **helm**, k8s üzerindeki uygulamalar için bir paket yönetim aracı.</sub>
 
-- **cert-manager** yüklemek için
+- **cert-manager** yüklemek için (bu sayede k8s üzerindeki sertifika yönetimlerini yapmak mümkün olabiliyor)
 ```
 helm install cert-manager jetstack/cert-manager \
   --namespace ingress-default \
@@ -94,13 +98,14 @@ helm install cert-manager jetstack/cert-manager \
 kubectl get services -n ingress-default
 kubectl -n ingress-default get svc nginx-ingress-ingress-nginx-controller -o json | jq .status.loadBalancer.ingress[0].ip
 ```
-<sub>* IP'i bir domain ile ilişkilendirmek için kullanabiliriz</sub>
+![image](https://user-images.githubusercontent.com/4550197/125045063-44987580-e0a5-11eb-8ea2-3c4708e4616b.png)
+<sub>* IP'i bir domain ile ilişkilendirmek için kullanabiliriz.</sub>
 
 - Ingress'i oluşturmak için
 ```
 kubectl apply -f k8s/azure_aks/ingress_frontend.yaml
 ```
-<sub>* Blog yazısında _Azure DevOps_ üzerinden basitçe _kubectl_ komutlarını çalıştırıyorduk. Ama komut satırından da bütün _service, pod...vs._ tanımları çalıştırılabilir.</sub>
+<sub>* Blog yazısında _Azure DevOps_ üzerinden basitçe _kubectl_ komutlarını çalıştırıyorduk. Ama komut satırından da bütün _service, pod...vs._ tanımları çalıştırılabilir. Repository'deki k8s klasörü altındaki, __azure_aks__ klasörü altındaki *.yaml dosyalarını benzer şekilde çalıştırmak mümkün  </sub>
 
 
 - Sertifika kontrolleri
