@@ -13,6 +13,8 @@ Bu repository'de [Azure Kubernetes Service ile tanışalım](https://www.minepla
   - [ASP.NET Core Backend uygulaması](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/SampleAPI) - Docker imajlarının oluştuğu uygulama
   - [ASP.NET Core Forentend uygulaması](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/SampleApp) - Docker imajlarının oluştuğu uygulama
 
+
+
 -------------------------------------------------------------------------------
 
 ## ![Güncelleme](https://via.placeholder.com/15/1589F0/000000?text=+) Güncelleme
