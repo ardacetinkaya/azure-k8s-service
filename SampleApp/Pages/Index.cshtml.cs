@@ -56,18 +56,8 @@ namespace SampleApp.Pages
                 _logger.LogError($"!!!API ERROR!!! - {ex.Message}");
             }
 
-            try
-            {
-                
-                Files = Directory.GetFiles("./files");
- 
-            }
-            catch (System.Exception ex)
-            {
-                
-                _logger.LogError($"!!!FILE LIST ERROR!!! - {ex.Message}");;
-            }
-
+            LoadFiles();
+        
         }
 
         public async Task OnPostAsync()
@@ -78,11 +68,10 @@ namespace SampleApp.Pages
                 {
                     return;
                 }
-    
                 _logger.LogInformation($"Uploading {UploadedFile.FileName}.");
                 
-                if(!Directory.Exists("./files")) Directory.CreateDirectory("./files");
-                string targetFileName = $"files/{UploadedFile.FileName}";
+                string targetFileName = $"{Path.Join(_configuration.GetValue<string>("UploadDirectory"))}/{UploadedFile.FileName}";
+
                 using (var stream = new FileStream(targetFileName, FileMode.Create))
                 {
                     await UploadedFile.CopyToAsync(stream);
@@ -94,6 +83,20 @@ namespace SampleApp.Pages
                 _logger.LogError($"!!!UPLOAD ERROR!!! - {ex.Message}");
             }
 
+        }
+
+        private void LoadFiles(){
+            try
+            {
+                
+                Files = Directory.GetFiles($"{Path.Join(_configuration.GetValue<string>("UploadDirectory"))}");
+ 
+            }
+            catch (System.Exception ex)
+            {
+                
+                _logger.LogError($"!!!FILE LIST ERROR!!! - {ex.Message}");;
+            }
         }
     }
 }
