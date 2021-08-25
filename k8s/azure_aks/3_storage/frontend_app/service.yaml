@@ -26,7 +26,7 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT
           value: Production
         volumeMounts:
-        - mountPath: "/app/files"
+        - mountPath: "/files"
           name: filevolume
       volumes:
         - name: filevolume
