@@ -27,11 +27,11 @@ spec:
           value: Production
         volumeMounts:
         - mountPath: "/app/files"
-          name: azure
+          name: filevolume
       volumes:
-        - name: azure
+        - name: filevolume
           persistentVolumeClaim:
-            claimName: azurefile
+            claimName: persistent-volume-claim
 ---
 apiVersion: v1
 kind: Service

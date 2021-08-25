@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: azurefilevolume
+  name: persistent-volume
 spec:
   capacity:
     storage: 5Gi
@@ -9,13 +9,20 @@ spec:
     - ReadWriteMany
   azureFile:
     secretName: azure-secret
-    shareName: aksshare
+    shareName: persistent
     readOnly: false
+  mountOptions:
+  - dir_mode=0777
+  - file_mode=0777
+  - uid=1000
+  - gid=1000
+  - mfsymlinks
+  - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: azurefilevolumeclaim
+  name: persistent-volume-claim
 spec:
   accessModes:
     - ReadWriteMany
