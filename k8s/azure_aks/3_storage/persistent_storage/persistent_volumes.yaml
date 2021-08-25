@@ -9,7 +9,7 @@ spec:
     - ReadWriteMany
   azureFile:
     secretName: azure-secret
-    shareName: persistent
+    shareName: persistent #Azure FileShare name
     readOnly: false
   mountOptions:
   - dir_mode=0777
