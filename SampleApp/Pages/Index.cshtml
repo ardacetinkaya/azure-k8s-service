@@ -18,3 +18,16 @@
     </ul>
 </p>
 <p>Mode: @Model.Environment</p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">File upload</div>
+            <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                <input asp-for="UploadedFile" />
+                <input type="submit" />
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
