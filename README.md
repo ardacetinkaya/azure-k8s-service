@@ -69,7 +69,7 @@ kubectl get nodes
 kubectl exec -it {pod_adı} -- /bin/bash
 ```
 
-- kubectl, [Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)'inden daha fazla temel bazı komutları bulmak mümkün
+- [Kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)'de temel bazı komutları bulmak mümkün
 
 
 -------------------------------------------------------------------------------
