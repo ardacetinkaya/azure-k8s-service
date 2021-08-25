@@ -8,16 +8,21 @@
     <h1 class="display-4">Hello World</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<p>Mode: @Model.Environment</p>
 <p>
+    <span>Weather Forecast API results</span>
     <ul>
-        ---------------------
         @foreach (var forecast in Model.Forecasts)
         {
             <li>@forecast.Date.ToShortDateString() - @forecast.Summary</li>
         }
+        @if(Model.Forecasts.Count() == 0){
+            <li>No forecast available</li>
+        }
+        <br />
     </ul>
 </p>
-<p>Mode: @Model.Environment</p>
+
 <div class="row">
     <div class="col-md-6">
         <div class="card">
@@ -27,6 +32,20 @@
                 <input asp-for="UploadedFile" />
                 <input type="submit" />
             </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Files</div>
+            <div class="card-body">
+                <ul>
+                    @foreach (var file in Model.Files)
+                    {
+                        <li>@file</li>
+                    }
+                </ul>
             </div>
         </div>
     </div>

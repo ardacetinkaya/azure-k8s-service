@@ -18,6 +18,7 @@ namespace SampleApp.Pages
         private readonly IHttpClientFactory _clientFactory;
         private readonly IConfiguration _configuration;
         public IEnumerable<WeatherForecast> Forecasts { get; private set; } = new List<WeatherForecast>();
+        public IEnumerable<string> Files { get; private set; } = new List<string>();
 
         public string Environment { get; set; }
 
@@ -49,12 +50,22 @@ namespace SampleApp.Pages
                         PropertyNameCaseInsensitive = true
                     });
                 }
-
-                
             }
             catch (System.Exception ex)
             {
-                _logger.LogError($"!!!ERROR!!! - {ex.Message}");
+                _logger.LogError($"!!!API ERROR!!! - {ex.Message}");
+            }
+
+            try
+            {
+                
+                Files = Directory.GetFiles("./files");
+ 
+            }
+            catch (System.Exception ex)
+            {
+                
+                _logger.LogError($"!!!FILE LIST ERROR!!! - {ex.Message}");;
             }
 
         }
@@ -80,7 +91,7 @@ namespace SampleApp.Pages
             catch (System.Exception ex)
             {
                 
-                _logger.LogError($"!!!ERROR!!! - {ex.Message}");
+                _logger.LogError($"!!!UPLOAD ERROR!!! - {ex.Message}");
             }
 
         }
