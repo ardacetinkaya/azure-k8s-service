@@ -64,6 +64,8 @@ kubectl get nodes
 ```
 ![image](https://user-images.githubusercontent.com/4550197/125045240-727dba00-e0a5-11eb-9e36-f77ec899897c.png)
 
+- kubectl, [Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)'inden daha fazla temel bazı komutları bulmak mümkün
+
 
 -------------------------------------------------------------------------------
 ## ![!!!BONUS!!!😀](https://via.placeholder.com/15/c5f015/000000?text=+) !!!BONUS!!!😀 
