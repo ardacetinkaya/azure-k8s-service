@@ -37,4 +37,4 @@ kubectl apply -f k8s/azure_aks/3_storage/persistent_storage/persistent_volumes.y
 ```
 
 - Bu örnekte uygulama tarafından upload edilen dosyalar, pod'dan bağımsız bir şekilde, daha önceden yaratılmış bir tane __Azure Storage__'da tutulabilmekte. Pod'lar silinse bile dosyalar korunabilmekte.
-![Screen Shot 2021-08-26 at 23 01 30](https://user-images.githubusercontent.com/4550197/131028394-1d99fa8c-f53f-44f3-a33b-6067226dfca6.png)
+
