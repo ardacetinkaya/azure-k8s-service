@@ -9,21 +9,27 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 <p>Mode: @Model.Environment</p>
-<p>
-    <span>Weather Forecast API results</span>
-    <ul>
-        @foreach (var forecast in Model.Forecasts)
-        {
-            <li>@forecast.Date.ToShortDateString() - @forecast.Summary</li>
-        }
-        @if(Model.Forecasts.Count() == 0){
-            <li>No forecast available</li>
-        }
-        <br />
-    </ul>
-</p>
-
 <div class="row">
+    <div class="col-md-12"><h4>Backend API Call</h4></div>
+    <div class="col-md-12">
+        <p>
+            <span>Weather Forecast API results</span>
+            <ul>
+                @foreach (var forecast in Model.Forecasts)
+                {
+                    <li>@forecast.Date.ToShortDateString() - @forecast.Summary</li>
+                }
+                @if(Model.Forecasts.Count() == 0){
+                    <li>No forecast available</li>
+                }
+                <br />
+            </ul>
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12"><h4>Persistent Storage Part</h4></div>
+
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">File upload</div>

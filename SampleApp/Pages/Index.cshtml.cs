@@ -12,7 +12,7 @@ using System.IO;
 
 namespace SampleApp.Pages
 {
-    [IgnoreAntiforgeryToken(Order = 1001)]//Not a real anti-forgery token, but we don't want to send it to the server
+    
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
@@ -90,7 +90,7 @@ namespace SampleApp.Pages
             try
             {
                 
-                Files = Directory.GetFiles($"{Path.Join(_configuration.GetValue<string>("UploadDirectory"))}");
+                Files = Directory.GetFiles($"{Path.Join(_configuration.GetValue<string>("UploadDirectory"))}", "*.txt");
  
             }
             catch (System.Exception ex)
