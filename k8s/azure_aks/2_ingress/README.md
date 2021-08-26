@@ -1,6 +1,9 @@
 
 # Ingress Controller - nginx
 
+**Ingress Controllers**, cluster'a olan girişlerin kontrol edildiği ve sağlandığı yapı olarak düşünülebilir. Bu bağlamda Ingress Controller olarak **NGINX**'i, Azure Kubernetes Service'de nasıl kullanabiliriz kabaca bir örnek;
+
+
 - Kubernetes içinde **namespace** yaratmak için(__ingress-default__ adında bir namespace yaratılır)
 ```
 kubectl create namespace ingress-default
