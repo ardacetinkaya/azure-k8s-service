@@ -12,6 +12,7 @@ using System.IO;
 
 namespace SampleApp.Pages
 {
+    [IgnoreAntiforgeryToken(Order = 1001)]//Not a real anti-forgery token, but we don't want to send it to the server
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
