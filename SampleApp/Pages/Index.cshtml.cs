@@ -23,6 +23,8 @@ namespace SampleApp.Pages
 
         public string Environment { get; set; }
 
+        public string ConfigurationValue { get; set; }
+
         [BindProperty]
         public IFormFile UploadedFile { get; set; }
 
@@ -39,6 +41,7 @@ namespace SampleApp.Pages
             try
             {
                 Environment = _configuration["ASPNETCORE_ENVIRONMENT"];
+                ConfigurationValue = _configuration["someconfigurationkey"] ?? "No value found";
                 var request = new HttpRequestMessage(HttpMethod.Get, "weatherforecast");
                 var client = _clientFactory.CreateClient("backend");
 

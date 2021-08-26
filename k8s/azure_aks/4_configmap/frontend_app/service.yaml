@@ -32,6 +32,9 @@ spec:
         - name: filevolume
           persistentVolumeClaim:
             claimName: persistent-volume-claim
+        - name: configurations
+          configMap:
+            name: private-frontend-configurations
 ---
 apiVersion: v1
 kind: Service
