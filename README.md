@@ -69,6 +69,11 @@ kubectl get nodes
 kubectl exec -it {pod_adı} -- /bin/bash
 ```
 
+- Herhangi bir *pod*'u olmayan Replica Set'leri silmek için
+```
+kubectl delete replicaset $(kubectl get replicaset -o jsonpath='{ .items[?(@.spec.replicas==0)].metadata.name }')
+```
+
 - [Kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)'de temel bazı komutları bulmak mümkün
 
 
