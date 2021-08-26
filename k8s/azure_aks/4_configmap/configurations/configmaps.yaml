@@ -4,4 +4,15 @@ metadata:
   name: private-frontend-configurations
   namespace: default
 data:
-  someconfigurationkey: "Hello World"
+  appsettings.json: |-
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      },
+      "AllowedHosts": "*",
+      "someconfigurationkey":"Hello World"
+    }
