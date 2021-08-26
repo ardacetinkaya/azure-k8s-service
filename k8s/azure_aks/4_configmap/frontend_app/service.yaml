@@ -28,6 +28,8 @@ spec:
         volumeMounts:
         - mountPath: "/files"
           name: filevolume
+        - mountPath: "/app/configurations"
+          name: configurations
       volumes:
         - name: filevolume
           persistentVolumeClaim:
