@@ -6,13 +6,5 @@ metadata:
 data:
   appsettings.json: |-
     {
-      "Logging": {
-        "LogLevel": {
-          "Default": "Information",
-          "Microsoft": "Warning",
-          "Microsoft.Hosting.Lifetime": "Information"
-        }
-      },
-      "AllowedHosts": "*",
-      "someconfigurationkey":"Hello World"
+      "someconfigurationkey": "Hello World"
     }
