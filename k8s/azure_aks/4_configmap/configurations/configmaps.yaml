@@ -6,5 +6,5 @@ metadata:
 data:
   appsettings.json: |-
     {
-      "someconfigurationkey": "Hello World"
+      "someconfigurationkey": "Hello Kubernetes"
     }

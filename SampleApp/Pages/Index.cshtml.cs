@@ -25,8 +25,6 @@ namespace SampleApp.Pages
 
         public string ConfigurationValue { get; set; }
 
-        public string AllConfigurations { get; set; }
-
         [BindProperty]
         public IFormFile UploadedFile { get; set; }
 
@@ -44,8 +42,7 @@ namespace SampleApp.Pages
             {
                 Environment = _configuration["ASPNETCORE_ENVIRONMENT"];
                 ConfigurationValue = _configuration["someconfigurationkey"] ?? "No value found";
-                var root = (IConfigurationRoot)_configuration;
-                AllConfigurations = root.GetDebugView();
+
                 var request = new HttpRequestMessage(HttpMethod.Get, "weatherforecast");
                 var client = _clientFactory.CreateClient("backend");
 
