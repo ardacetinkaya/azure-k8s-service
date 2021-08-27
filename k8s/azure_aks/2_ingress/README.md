@@ -69,3 +69,16 @@ kubectl get certificaterequests.cert-manager.io
 kubectl describe certificate www-crt
 kubectl delete certificate www-crt
 ```
+
+- Ingress üzerinde sticky session olması yani gelen request'lerin hep aynı pod'a gitmesi için
+```yaml
+    #annotations kısmında örnek olarak aşağıdaki gibi
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "some-cookie"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+    nginx.ingress.kubernetes.io/affinity-mode: persistent
+    nginx.ingress.kubernetes.io/session-cookie-hash: sha1
+    nginx.ingress.kubernetes.io/session-cookie-path: /
+
+```
