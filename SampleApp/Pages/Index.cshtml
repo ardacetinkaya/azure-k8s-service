@@ -64,3 +64,24 @@
         </p>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-12"><h4>Kubernetes API</h4></div>
+    <div class="col-md-12">
+        <p>
+            <span>Current Pod: @Model.CurrentPod</span>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Pods</div>
+            <div class="card-body">
+                <ul>
+                    @foreach (var pod in Model.Pods)
+                    {
+                        <li>@pod</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

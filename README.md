@@ -75,6 +75,10 @@ kubectl delete replicaset $(kubectl get replicaset -o jsonpath='{ .items[?(@.spe
 
 - [Kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)'de temel bazı komutları bulmak mümkün
 
+- Docker imajlarını oluşturup ACR'e Push etmek için
+```
+az acr build --registry k8simagesregistery --image app:v1 .
+```
 
 -------------------------------------------------------------------------------
 ## ![!!!BONUS!!!😀](https://via.placeholder.com/15/c5f015/000000?text=+) !!!BONUS!!!😀 

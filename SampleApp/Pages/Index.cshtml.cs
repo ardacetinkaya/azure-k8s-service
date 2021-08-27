@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
+using k8s;
 
 namespace SampleApp.Pages
 {
@@ -20,7 +21,8 @@ namespace SampleApp.Pages
         private readonly IConfiguration _configuration;
         public IEnumerable<WeatherForecast> Forecasts { get; private set; } = new List<WeatherForecast>();
         public IEnumerable<string> Files { get; private set; } = new List<string>();
-
+        public List<string> Pods { get; private set; } = new List<string>();
+        public string CurrentPod { get; set; }
         public string Environment { get; set; }
 
         public string ConfigurationValue { get; set; }
@@ -62,7 +64,8 @@ namespace SampleApp.Pages
             }
 
             LoadFiles();
-        
+
+            LoadPods();        
         }
 
         public async Task OnPostAsync()
@@ -90,7 +93,8 @@ namespace SampleApp.Pages
 
         }
 
-        private void LoadFiles(){
+        private void LoadFiles()
+        {
             try
             {
                 
@@ -100,8 +104,27 @@ namespace SampleApp.Pages
             catch (System.Exception ex)
             {
                 
-                _logger.LogError($"!!!FILE LIST ERROR!!! - {ex.Message}");;
+                _logger.LogError($"!!!FILE LIST ERROR!!! - {ex.Message}");
             }
+        }
+    
+        private void LoadPods()
+        {
+            try
+            {
+                var config = KubernetesClientConfiguration.BuildDefaultConfig();
+                IKubernetes k8sClient = new Kubernetes(config);
+                CurrentPod = System.Environment.GetEnvironmentVariable("COMPUTERNAME");
+                var pods = k8sClient.ListNamespacedPod("default");
+                foreach (var item in pods.Items)
+                {
+                    Pods.Add($"{item.Metadata.Name.PadRight(45)}:{item.Status.Phase}");
+                }
+
+            }catch (System.Exception ex){
+                _logger.LogError($"!!!POD LIST ERROR!!! - {ex.Message}");;
+            }
+
         }
     }
 }

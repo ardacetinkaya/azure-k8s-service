@@ -25,6 +25,10 @@ spec:
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Production
+        - name: COMPUTERNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
         volumeMounts:
         - mountPath: "/files"
           name: filevolume
