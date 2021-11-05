@@ -12,11 +12,18 @@ Bu repository'de [Azure Kubernetes Service ile tanışalım](https://www.minepla
   - [ASP.NET Core Forentend uygulaması](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/SampleApp) - Docker imajlarının oluştuğu uygulama
 
 
-### ℹ Bu repository'de __Kubernetes(K8s)__ ile ilgili bazı konular ile ilgili temel basit örnekleri de zaman içerisinde eklemeye çalışacağım. 
+### ℹ Bu repository'de __AKS__ ve __Kubernetes(K8s)__ ile ilgili bazı konular ile ilgili temel basit örnekleri de zaman içerisinde eklemeye çalışacağım. k8s klasörü içerisinden takip edilebilir.
+
+
+- [1_basic](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/k8s/azure_aks/1_basic)
+- [2_ingress](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/k8s/azure_aks/2_ingress)
+- [3_storage](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/k8s/azure_aks/3_storage)
+- [4_configmap](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/k8s/azure_aks/4_configmap)
+- [5_key_vault_provider_for_csi](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/k8s/azure_aks/5_key_vault_provider_for_csi)
 
 -------------------------------------------------------------------------------
 
-## ![Güncelleme](https://via.placeholder.com/15/1589F0/000000?text=+) Güncelleme
+## ![Güncelleme](https://via.placeholder.com/15/1589F0/000000?text=+) Giriş
 Bu repo.'ya ev sahipliği yapan yazıda, **k8s** için gerekli olan bileşenleri, Azure'da portal dışında __terraform__ gibi "infra-as-code" konsepti ile de oluşturabileceğimizi belirtmiştim. Kodlar arasında **_infrastructure/azure_** klasörü içinde Azure Kubernetes Service için örnek olabilecek kodları görebilirsiniz.
 
 - **_[infrastructure/azure](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/infrastructure/azure)_** klasörü içerisinde _terraform_ ile Azure Kubernetes Service içinde bir cluster oluşturmak için sırasıyla:
