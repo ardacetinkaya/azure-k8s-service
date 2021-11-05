@@ -1,0 +1,19 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: azure-kv
+spec:
+  provider: azure
+  parameters:
+    usePodIdentity: "false"               # Set to true for using aad-pod-identity to access keyvault
+    useVMManagedIdentity: "true"
+    userAssignedIdentityID: "$USER_ASSIGNED_IDENTITY_ID" 
+    keyvaultName: aksk8skeyvault         # Set to the name of your Azure Key Vault instance
+    cloudName: ""                        # [OPTIONAL for Azure] if not provided, azure environment will default to AzurePublicCloud
+    objects:  |
+      array:
+        - |
+          objectName: SomeSecret
+          objectType: secret             # object types: secret, key or cert
+          objectVersion: ""              # [OPTIONAL] object versions, default to latest if empty
+    tenantId: "$TENANT_ID"                # The tenant ID of the Azure Key Vault instance

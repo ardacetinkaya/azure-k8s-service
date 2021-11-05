@@ -27,3 +27,8 @@ variable "nginx_external_ip" {
   type        = string
   description = ""
 }
+
+variable "cluster_managed_user_client_id" {
+  type        = string
+  description = ""
+}

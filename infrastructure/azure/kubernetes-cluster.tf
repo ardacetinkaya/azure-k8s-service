@@ -3,11 +3,19 @@ resource "azurerm_kubernetes_cluster" "k8s_cluster_01" {
   name                = "k8s-cluster-01"
   location            = azurerm_resource_group.k8s_demo_resources.location
   resource_group_name = azurerm_resource_group.k8s_demo_resources.name
-  dns_prefix          = "k8s-dns" 
+  dns_prefix          = "k8s-dns"
+
+  # role_based_access_control {
+  #   enabled = true
+  #   azure_active_directory {
+  #     managed             = true
+  #     azure_rbac_enabled  = true
+  #   }
+  # }
 
   default_node_pool {
     name           = "default"
-    node_count     = 2
+    node_count     = 1
     vm_size        = "Standard_B2s"
     vnet_subnet_id = azurerm_subnet.k8s_cluster_01_network_01_subnet_01.id
   }

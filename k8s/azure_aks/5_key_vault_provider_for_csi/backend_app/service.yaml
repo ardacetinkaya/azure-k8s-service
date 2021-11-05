@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: private-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample
+      tier: private-backend
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: sample
+        tier: private-backend
+        track: stable
+    spec:
+      containers:
+      - name: sampleapi-container
+        image: k8simagesregistery.azurecr.io/api:414
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: secrets-store01
+          mountPath: "/mnt/secrets-store"
+          readOnly: true
+      volumes:
+        - name: secrets-store01
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: azure-kv
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: private-backend
+spec:
+  selector:
+    app: sample
+    tier: private-backend
+  ports:
+  - port: 8090
+    targetPort: 80
+  type: ClusterIP

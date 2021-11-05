@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: private-frontend-configurations
+  namespace: default
+data:
+  appsettings.json: |-
+    {
+      "someconfigurationkey": "Hello Kubernetes"
+    }
