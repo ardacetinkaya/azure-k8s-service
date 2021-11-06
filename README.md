@@ -18,7 +18,7 @@ Bu repository'de [Azure Kubernetes Service ile tanışalım](https://www.minepla
 - [1_basic](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/k8s/azure_aks/1_basic)
 - [2_ingress](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/k8s/azure_aks/2_ingress)
 - [3_storage](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/k8s/azure_aks/3_storage)
-- [4_configmap](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/k8s/azure_aks/4_configmap)
+- [4_configmap_secrets](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/k8s/azure_aks/4_configmap_secrets)
 - [5_key_vault_provider_for_csi](https://github.com/ardacetinkaya/azure-k8s-service/tree/master/k8s/azure_aks/5_key_vault_provider_for_csi)
 
 -------------------------------------------------------------------------------
