@@ -1,6 +1,6 @@
 # Azure Kubernetes Service demo
 
-
+[![Build status](https://dev.azure.com/Miyop/LearningProjects/_apis/build/status/Kubernetes)](https://dev.azure.com/Miyop/LearningProjects/_build/latest?definitionId=14)
 <img align="right" width="150" height="150" src="https://user-images.githubusercontent.com/4550197/125051903-18342780-e0ac-11eb-976b-99af7e9e2f9f.png">
 
 
