@@ -18,13 +18,28 @@ spec:
     spec:
       containers:
       - name: sampleapp-container
-        image: k8simagesregistery.azurecr.io/app:#{tag}#
+        image: k8simagesregistery.azurecr.io/app:v4
         imagePullPolicy: Always
         ports:
         - containerPort: 80
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Production
+        - name: DATABASE_USER
+          valueFrom: 
+            secretKeyRef: 
+              key: database_user
+              name: some-local-secrets
+        - name: DATABASE_PASSWORD
+          valueFrom: 
+            secretKeyRef: 
+              key: database_password
+              name: some-local-secrets
+        - name: LICENSE_KEY
+          valueFrom: 
+            secretKeyRef: 
+              key: license_key
+              name: some-local-secrets
         - name: COMPUTERNAME
           valueFrom:
             fieldRef:
