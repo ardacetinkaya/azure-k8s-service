@@ -25,6 +25,21 @@ spec:
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Production
+        - name: DATABASE_USER
+          valueFrom: 
+            secretKeyRef: 
+              key: database_user
+              name: some-local-secrets
+        - name: DATABASE_PASSWORD
+          valueFrom: 
+            secretKeyRef: 
+              key: database_password
+              name: some-local-secrets
+        - name: LICENSE_KEY
+          valueFrom: 
+            secretKeyRef: 
+              key: license_key
+              name: some-local-secrets
         - name: COMPUTERNAME
           valueFrom:
             fieldRef:
