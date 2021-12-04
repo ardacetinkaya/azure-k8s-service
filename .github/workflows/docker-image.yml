@@ -5,6 +5,7 @@ on:
     branches: [ master ]
     paths:
     - SampleAPI/**
+  workflow_dispatch:
 
 jobs:
 
