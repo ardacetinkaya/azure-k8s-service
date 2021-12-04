@@ -27,5 +27,5 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build ./SampleAPI --file SampleApp/Dockerfile -t k8simagesregistery.azurecr.io/sampleapp:${{ github.sha }}
+        docker build ./SampleApp --file SampleApp/Dockerfile -t k8simagesregistery.azurecr.io/sampleapp:${{ github.sha }}
         docker push k8simagesregistery.azurecr.io/sampleapp:${{ github.sha }}
