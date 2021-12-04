@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Image Build for SampleAPI
 
 on:
   push:
@@ -15,5 +15,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build ./SampleAPI --file SampleAPI/Dockerfile --tag api:$(date +%s)
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: 'Build and push image'
+      uses: azure/docker-login@v1
+      with:
+        login-server: k8simagesregistery.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+        docker build ./SampleAPI --file SampleAPI/Dockerfile -t k8simagesregistery.azurecr.io/sampleapi:${{ github.sha }}
+        docker push k8simagesregistery.azurecr.io/sampleapi:${{ github.sha }}
+
+
