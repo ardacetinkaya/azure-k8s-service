@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: sampleapi-container
-        image: k8simagesregistery.azurecr.io/api:414
+        image: k8simagesregistery.azurecr.io/sampleapi:278c1100978f75506c92f7c7a3200424f4e19680
         imagePullPolicy: Always
         ports:
         - containerPort: 80

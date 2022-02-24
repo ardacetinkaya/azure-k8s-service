@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: sampleapp-container
-        image: k8simagesregistery.azurecr.io/app:#{tag}#
+        image: k8simagesregistery.azurecr.io/sampleapp:93658b1650b0a04cd050b9bdcf7ac8a98c4b80e8
         imagePullPolicy: Always
         ports:
         - containerPort: 80
